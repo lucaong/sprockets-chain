@@ -12,6 +12,7 @@ var sc = new SprocketsChain();
 // Append paths to the list of load paths
 sc.appendPath("app/assets/javascript");
 sc.appendPath("lib/assets/javascript");
+sc.appendPath("vendor/assets/jquery")
 
-var chain = sc.depChain("application.js"); // Returns ordered array of absolute file paths
+var chain = sc.depChain("application.js"); // Returns ordered array of absolute file paths in the application.js bundle
 ```
