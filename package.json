@@ -1,0 +1,18 @@
+{
+  "author": "Luca Ongaro",
+  "name": "sprockets-chain",
+  "version": "0.0.0",
+  "engines": {
+    "node": ">=0.8"
+  },
+  "main": "./lib/sprockets-chain.js",
+  "scripts": {
+    "test": "./node_modules/.bin/buster-test -c spec/buster.js"
+  },
+  "dependencies": {
+    "hike": "0.1.x"
+  },
+  "devDependencies": {
+    "buster": "0.6.x"
+  }
+}
