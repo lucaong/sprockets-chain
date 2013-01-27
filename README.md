@@ -1,6 +1,6 @@
-# SprocketsChain
+# SprocketsChain (experimental)
 
-This is an experiment. The aim is to parse sprocket includes and return the dependency chain, which is an ordered list of file paths where each file appears after all its dependencies.
+`SprocketsChain` parses sprocket includes and returns the dependency chain, which is an ordered list of file paths where each file appears after all its dependencies.
 
 ## Usage:
 
@@ -13,6 +13,9 @@ var sc = new SprocketsChain();
 sc.appendPath("app/assets/javascript");
 sc.appendPath("lib/assets/javascript");
 sc.appendPath("vendor/assets/jquery");
+
+// If necessary, append extensions (defaults are ".js", ".coffee")
+sc.appendExtensions(".ejs", ".eco");
 
 var chain = sc.depChain("application.js"); // Returns ordered array of absolute file paths in the application.js bundle
 ```
