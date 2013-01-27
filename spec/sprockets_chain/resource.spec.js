@@ -13,7 +13,7 @@ describe("SprocketsChain", function() {
     this.res  = new SprocketsChain.Resource( "one.js", sc._trail );
     this.res2 = new SprocketsChain.Resource( "two/two.js", sc._trail );
   });
-  
+
   describe("SprocketsChain.Resource", function() {
 
     describe("fullPath", function() {
@@ -49,11 +49,18 @@ describe("SprocketsChain", function() {
     });
 
     describe("parseDeps", function() {
-      it("returns logical path of all dependencies", function() {
+      it("returns all dependencies, with logical path and directive", function() {
         this.stub( this.res, "parseRequires", function() {
           return ["require four", "require_self", "require_dir two", "require_tree five"];
         });
-        expect( this.res.parseDeps() ).toEqual([ "four", "one.js", "two/three.coffee", "two/two.js", "five/six/seven.js.coffee", "five/six/six.js" ]);
+        expect( this.res.parseDeps() ).toEqual([
+          { path: "four",                     directive: "require" },
+          { path: "one.js",                   directive: "require_self" },
+          { path: "two/three.coffee",         directive: "require_dir" },
+          { path: "two/two.js",               directive: "require_dir" },
+          { path: "five/six/seven.js.coffee", directive: "require_tree" },
+          { path: "five/six/six.js",          directive: "require_tree" }
+        ]);
       });
     });
 
@@ -69,7 +76,7 @@ describe("SprocketsChain", function() {
     describe("depChain", function() {
       it("returns the dependency chain", function() {
         var chain    = this.res.depChain(),
-            expected = [ "eight/eight.coffee", "four.js", "one.js", "two/three.coffee", "two/two.js", "five/six/seven.js.coffee", "five/six/six.js" ]
+            expected = [ "eight/eight.coffee", "four.js", "one.js", "two/three.coffee", "two/two.js", "five/six/seven.js.coffee", "five/six/seven.js.coffee", "five/six/six.js" ]
             .map(function( p ) {
               var fixtures_dir = "spec/fixtures";
               if ( p === "four.js" ) {

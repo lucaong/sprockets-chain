@@ -17,5 +17,11 @@ sc.appendPath("vendor/assets/jquery");
 // If necessary, append extensions (defaults are ".js", ".coffee")
 sc.appendExtensions(".ejs", ".eco");
 
-var chain = sc.depChain("application.js"); // Returns ordered array of absolute file paths in the application.js bundle
+// Get ordered array of individual absolute file paths that compose the
+// `application.js` bundle
+var chain = sc.depChain("application.js");
 ```
+
+## Supported directives:
+
+`require`, `require_self`, `require_dir`, `require_tree`
