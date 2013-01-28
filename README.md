@@ -28,7 +28,7 @@ sc.appendExtensions(".ejs", ".eco");
 var chain = sc.depChain("application.js");
 ```
 
-## Supported Sprockets directives:
+## Supported Sprockets directives
 
 `require`, `require_self`, `require_directory`, `require_tree`, `include`
 
