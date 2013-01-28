@@ -4,9 +4,11 @@
 
 ## Why
 
-In some situations (e.g. JavaScript tests) precompiling assets is slow and actually not needed.
-It is more efficient to just require separate JavaScript/CoffeeScript assets in the correct order, and `SprocketsChain`
-is parsing require directives to provide you with the correct ordered list of file paths.
+`Sprockets` is very nice for managing assets and their dependencies. In JavaScript tests though, precompiling assets
+is slow and actually not needed. It is more efficient to just require separate JavaScript/CoffeeScript files in the
+correct order, and `SprocketsChain` is parsing the require directives to provide you with the correct ordered list of
+file paths. This helps setting up a JavaScript test suite that is fast and completely independent from the ruby
+application environment.
 
 ## Usage
 
