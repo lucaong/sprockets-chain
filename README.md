@@ -24,4 +24,4 @@ var chain = sc.depChain("application.js");
 
 ## Supported directives:
 
-`require`, `require_self`, `require_dir`, `require_tree`
+`require`, `require_self`, `require_dir`, `require_tree`, `include`
