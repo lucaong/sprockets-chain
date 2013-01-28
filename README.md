@@ -6,8 +6,8 @@ all its dependencies.
 
 ## Why
 
-`Sprockets` is very nice for managing assets and their dependencies in a Ruby project. In JavaScript tests though,
-precompiling assets is slow and actually not needed. It is more efficient to just require separate
+`Sprockets` is very nice for managing assets and their dependencies in a Ruby project. When testing JavaScript though,
+a precompilation step would be slow and actually not needed. It is more efficient to just require the separate
 JavaScript/CoffeeScript files in the correct order, and `SprocketsChain` is parsing the require directives to provide
 you with the correct ordered list of file paths. This helps setting up a JavaScript test suite that is fast and
 completely independent from the Ruby application environment.
