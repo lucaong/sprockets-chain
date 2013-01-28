@@ -1,11 +1,15 @@
 {
-  "author": "Luca Ongaro",
+  "author": "Luca Ongaro <mail@lucaongaro.eu> (http://www.lucaongaro.eu)",
   "name": "sprockets-chain",
-  "version": "0.0.0",
-  "engines": {
-    "node": ">=0.8"
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lucaong/sprockets-chain.git"
   },
-  "main": "./lib/sprockets-chain.js",
+  "engines": {
+    "node": ">=0.6"
+  },
+  "main": "./lib/sprockets_chain.js",
   "scripts": {
     "test": "./node_modules/.bin/buster-test -c spec/buster.js"
   },
