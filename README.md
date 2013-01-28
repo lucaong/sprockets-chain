@@ -30,4 +30,4 @@ var chain = sc.depChain("application.js");
 
 ## Supported Sprockets directives:
 
-`require`, `require_self`, `require_dir`, `require_tree`, `include`
+`require`, `require_self`, `require_directory`, `require_tree`, `include`

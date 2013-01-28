@@ -35,14 +35,14 @@ describe("SprocketsChain", function() {
     describe("parseRequires", function() {
       it("returns all require directives", function() {
         this.stub( this.res, "content", function() {
-          return "//= require four\n#=  require_self\n/*\n*= require_dir  two\n*/"
+          return "//= require four\n#=  require_self\n/*\n*= require_directory  ./two\n*/"
         });
-        expect( this.res.parseRequires() ).toEqual(["require four", "require_self", "require_dir  two"]);
+        expect( this.res.parseRequires() ).toEqual(["require four", "require_self", "require_directory  ./two"]);
       });
 
       it("does not return directives happening after code", function() {
         this.stub( this.res, "content", function() {
-          return "//= require four\nsome code\n#=  require_self\n/*\n*= require_dir  two\n*/"
+          return "//= require four\nsome code\n#=  require_self\n/*\n*= require_directory  ./two\n*/"
         });
         expect( this.res.parseRequires() ).toEqual(["require four"]);
       });
@@ -51,16 +51,36 @@ describe("SprocketsChain", function() {
     describe("parseDeps", function() {
       it("returns all dependencies, with logical path and directive", function() {
         this.stub( this.res, "parseRequires", function() {
-          return ["require four", "require_self", "require_dir two", "require_tree five"];
+          return ["require four", "require_self", "require_directory ./two", "require_tree ./five"];
         });
         expect( this.res.parseDeps() ).toEqual([
           { path: "four",                     directive: "require" },
           { path: "one.js",                   directive: "require_self" },
-          { path: "two/three.coffee",         directive: "require_dir" },
-          { path: "two/two.js",               directive: "require_dir" },
+          { path: "two/three.coffee",         directive: "require_directory" },
+          { path: "two/two.js",               directive: "require_directory" },
           { path: "five/six/seven.js.coffee", directive: "require_tree" },
           { path: "five/six/six.js",          directive: "require_tree" }
         ]);
+      });
+
+      it("throws error if require_directory is used with non-relative path", function() {
+        var self = this;
+        this.stub( this.res, "parseRequires", function() {
+          return ["require_directory two"];
+        });
+        expect(function() {
+          self.res.parseDeps();
+        }).toThrow("Error");
+      });
+
+      it("throws error if require_tree is used with non-relative path", function() {
+        var self = this;
+        this.stub( this.res, "parseRequires", function() {
+          return ["require_tree five"];
+        });
+        expect(function() {
+          self.res.parseDeps();
+        }).toThrow("Error");
       });
     });
 
