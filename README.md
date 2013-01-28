@@ -1,6 +1,7 @@
 # SprocketsChain (experimental)
 
-`SprocketsChain` parses sprockets directives and returns the dependency chain, which is an ordered list of file paths where each file appears after all its dependencies.
+`SprocketsChain` parses `Sprockets` require directives and returns the dependency chain for a bundle, which is a list
+of the file paths that make the bundle, ordered so that each file is preceded by all its dependencies.
 
 ## Why
 
@@ -32,7 +33,8 @@ var chain = sc.depChain("application.js");
 
 ## Supported Sprockets directives
 
-`require`, `require_self`, `require_directory`, `require_tree`, `include`
+The following `Sprockets` directive are supported: `require`, `require_self`, `require_directory`, `require_tree`
+and `include`
 
 ## MIT License
 
