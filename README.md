@@ -1,6 +1,12 @@
 # SprocketsChain (experimental)
 
-`SprocketsChain` parses sprocket includes and returns the dependency chain, which is an ordered list of file paths where each file appears after all its dependencies.
+`SprocketsChain` parses sprockets directives and returns the dependency chain, which is an ordered list of file paths where each file appears after all its dependencies.
+
+## Why:
+
+In some situations (e.g. JavaScript tests) precompiling assets is slow and actually not needed.
+It is more efficient to just require separate JavaScript/CoffeeScript assets in the correct order, and `SprocketsChain`
+is parsing require directives to provide you with the correct ordered list of file paths.
 
 ## Usage:
 
@@ -22,6 +28,6 @@ sc.appendExtensions(".ejs", ".eco");
 var chain = sc.depChain("application.js");
 ```
 
-## Supported directives:
+## Supported Sprockets directives:
 
 `require`, `require_self`, `require_dir`, `require_tree`, `include`
