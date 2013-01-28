@@ -1,15 +1,16 @@
 # SprocketsChain (experimental)
 
-`SprocketsChain` parses `Sprockets` require directives and returns the dependency chain for a bundle, which is a list
-of the file paths that make the bundle, ordered so that each file is preceded by all its dependencies.
+`SprocketsChain` is a node.js utility that parses `Sprockets` require directives and returns the dependency chain for
+a JavaScript bundle, which is a list of the file paths that make the bundle, ordered so that each file is preceded by
+all its dependencies.
 
 ## Why
 
-`Sprockets` is very nice for managing assets and their dependencies. In JavaScript tests though, precompiling assets
-is slow and actually not needed. It is more efficient to just require separate JavaScript/CoffeeScript files in the
-correct order, and `SprocketsChain` is parsing the require directives to provide you with the correct ordered list of
-file paths. This helps setting up a JavaScript test suite that is fast and completely independent from the ruby
-application environment.
+`Sprockets` is very nice for managing assets and their dependencies in a Ruby project. In JavaScript tests though,
+precompiling assets is slow and actually not needed. It is more efficient to just require separate
+JavaScript/CoffeeScript files in the correct order, and `SprocketsChain` is parsing the require directives to provide
+you with the correct ordered list of file paths. This helps setting up a JavaScript test suite that is fast and
+completely independent from the Ruby application environment.
 
 ## Usage
 
