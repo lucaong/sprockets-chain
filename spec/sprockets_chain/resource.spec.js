@@ -7,23 +7,30 @@ buster.spec.expose();
 describe("SprocketsChain", function() {
 
   before(function() {
-    var sc    = new SprocketsChain("./spec");
+    var sc     = new SprocketsChain("./spec");
     sc.appendPath("fixtures");
     sc.appendPath("fixtures2");
-    this.res  = new SprocketsChain.Resource( "one.js", sc._trail );
-    this.res2 = new SprocketsChain.Resource( "two/two.js", sc._trail );
+    this.trail = sc._trail;
+    this.res   = new SprocketsChain.Resource( "one.js", sc._trail );
+    this.res2  = new SprocketsChain.Resource( "two/two.js", sc._trail );
   });
 
   describe("SprocketsChain.Resource", function() {
 
-    describe("fullPath", function() {
-      it("returns the correct full path", function() {
-        expect( this.res.fullPath() ).toEqual( _path.resolve(".", "spec/fixtures/one.js") );
+    describe("initialize", function() {
+      it("sets the correct full path", function() {
+        var res = new SprocketsChain.Resource( "one.js", this.trail );
+        expect( res.full_path ).toEqual( _path.resolve(".", "spec/fixtures/one.js") );
+      });
+
+      it("sets the correct logical path with extension", function() {
+        var res = new SprocketsChain.Resource( "one", this.trail );
+        expect( res.logical_path ).toEqual( "one.js" );
       });
     });
 
     describe("resolve", function() {
-      it("resolves the logical path of a resource given its relative path", function() {
+      it("resolves the logical path given a path relative to the current resource", function() {
         expect( this.res2.resolve("./three") ).toEqual("two/three");
       });
 
@@ -87,9 +94,9 @@ describe("SprocketsChain", function() {
     describe("depTree", function() {
       it("creates the dependency tree", function() {
         var tree = this.res.depTree();
-        expect( tree.dependencies[0].logical_path ).toEqual("four");
+        expect( tree.dependencies[0].logical_path ).toEqual("four.js");
         expect( tree.dependencies[1].logical_path ).toEqual("one.js");
-        expect( tree.dependencies[0].dependencies[0].logical_path ).toEqual("eight/eight");
+        expect( tree.dependencies[0].dependencies[0].logical_path ).toEqual("eight/eight.coffee");
       });
     });
 
