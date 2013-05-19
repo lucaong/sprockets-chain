@@ -1,4 +1,4 @@
-# SprocketsChain (experimental)
+# SprocketsChain
 
 `SprocketsChain` is a small node.js utility that parses Sprockets require directives and returns the dependency chain
 for a JavaScript bundle, which is a list of the file paths that make the bundle, ordered so that each file is preceded
