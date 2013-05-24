@@ -22,7 +22,7 @@ var sc = new SprocketsChain();
 // Append paths to the list of load paths
 sc.appendPath("app/assets/javascript");
 sc.appendPath("lib/assets/javascript");
-sc.appendPath("vendor/assets/jquery");
+sc.appendPath("vendor/assets/javascript");
 
 // If necessary, append extensions (defaults are ".js", ".coffee")
 sc.appendExtensions(".ejs", ".eco");
