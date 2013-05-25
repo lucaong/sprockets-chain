@@ -1,1 +1,1 @@
-//= require eight/eight
+//= require "eight/eight"
