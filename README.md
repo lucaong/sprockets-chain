@@ -15,14 +15,15 @@ completely independent from the Ruby application environment.
 ## Usage
 
 ```javascript
+// karma.conf.js
 var SprocketsChain = require("sprockets-chain");
 
 var sc = new SprocketsChain();
 
 // Append paths to the list of load paths
-sc.appendPath("app/assets/javascript");
-sc.appendPath("lib/assets/javascript");
-sc.appendPath("vendor/assets/javascript");
+sc.appendPath("app/assets/javascripts");
+sc.appendPath("lib/assets/javascripts");
+sc.appendPath("vendor/assets/javascripts");
 
 // If necessary, append extensions (defaults are ".js", ".coffee")
 sc.appendExtensions(".ejs", ".eco");
