@@ -15,7 +15,6 @@ completely independent from the Ruby application environment.
 ## Usage
 
 ```javascript
-// karma.conf.js
 var SprocketsChain = require("sprockets-chain");
 
 var sc = new SprocketsChain();
