@@ -13,6 +13,7 @@ describe("SprocketsChain", function() {
     this.trail = sc._trail;
     this.res   = new SprocketsChain.Resource( "one.js", sc._trail );
     this.res2  = new SprocketsChain.Resource( "two/two.js", sc._trail );
+    this.res3  = new SprocketsChain.Resource( "bad_eoln.js", sc._trail );
   });
 
   describe("SprocketsChain.Resource", function() {
@@ -97,6 +98,13 @@ describe("SprocketsChain", function() {
         expect( tree.dependencies[0].logical_path ).toEqual("four.js");
         expect( tree.dependencies[1].logical_path ).toEqual("one.js");
         expect( tree.dependencies[0].dependencies[0].logical_path ).toEqual("eight/eight.coffee");
+      });
+    });
+
+    describe("depTree", function() {
+      it("creates the dependency tree", function() {
+        var tree = this.res3.depTree();
+        expect( tree.dependencies[0].logical_path ).toEqual("five/six/six.js");
       });
     });
 
