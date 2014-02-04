@@ -28,6 +28,55 @@ describe("SprocketsChain", function() {
         var res = new SprocketsChain.Resource( "one", this.trail );
         expect( res.logical_path ).toEqual( "one.js" );
       });
+      
+      describe("Windows paths", function() {
+        var mockPath;
+        var mockTrail;
+        
+        beforeEach(function(){
+          mockTrail = {
+            find: function(logical_path){
+              return mockPath;
+            }
+          };
+        });
+        
+        describe("simple resource path", function(){
+          beforeEach(function(){
+            mockPath = "c:\\Users\\MockUser\\sprockets-chain\\spec\\fixtures\\one.js";
+          });
+          
+          it("sets the correct full path with Windows separators", function(){
+            var res = new SprocketsChain.Resource( "one.js", mockTrail );
+            expect( res.full_path ).toEqual( "c:\\Users\\MockUser\\sprockets-chain\\spec\\fixtures\\one.js" );
+            expect( res.logical_path ).toEqual( "one.js" );
+          });
+
+          it("sets the correct logical path with extension with Windows separators", function() {
+            var res = new SprocketsChain.Resource( "one", mockTrail );
+            expect( res.full_path ).toEqual( "c:\\Users\\MockUser\\sprockets-chain\\spec\\fixtures\\one.js" );
+            expect( res.logical_path ).toEqual( "one.js" );
+          });
+        });
+        
+        describe("complex resource path", function(){
+          beforeEach(function(){
+            mockPath = "c:\\Users\\MockUser\\sprockets-chain\\spec\\fixtures\\two\\two.js";
+          });
+          
+          it("sets the correct full path with Windows separators", function(){
+            var res = new SprocketsChain.Resource( "two/two.js", mockTrail );
+            expect( res.full_path ).toEqual( "c:\\Users\\MockUser\\sprockets-chain\\spec\\fixtures\\two\\two.js" );
+            expect( res.logical_path ).toEqual( "two/two.js" );
+          });
+          
+          it("sets the logical path extension with Windows separators", function(){
+            var res = new SprocketsChain.Resource( "two/two", mockTrail );
+            expect( res.full_path ).toEqual( "c:\\Users\\MockUser\\sprockets-chain\\spec\\fixtures\\two\\two.js" );
+            expect( res.logical_path ).toEqual( "two/two.js" );
+          });
+        });
+      });
     });
 
     describe("resolve", function() {
