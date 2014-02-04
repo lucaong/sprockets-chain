@@ -17,6 +17,6 @@
     "hike": "0.1.x"
   },
   "devDependencies": {
-    "buster": "0.6.x"
+    "buster": "0.7.x"
   }
 }

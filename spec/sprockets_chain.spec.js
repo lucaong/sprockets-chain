@@ -1,5 +1,6 @@
 var buster         = require("buster"),
-    SprocketsChain = require("../lib/sprockets_chain");
+    SprocketsChain = require("../lib/sprockets_chain"),
+    expect         = buster.referee.expect;
 
 buster.spec.expose();
 
