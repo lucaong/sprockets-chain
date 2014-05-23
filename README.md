@@ -37,6 +37,14 @@ var chain = sc.depChain("application.js");
 The following Sprockets directive are supported: `require`, `require_self`, `require_directory`, `require_tree`
 and `include`
 
+
+## Contributing
+
+Contributes are very welcome :) Just make sure you write proper tests for your feature and send a pull request. To run the test suite, which is based on `BusterJS`, make sure you install all development dependencies with `npm install` and then just run `npm test`.
+
+Please do not bump the version number, I will do that when the change is accepted and merge.
+
+
 ## MIT License
 
 Copyright (c) 2013 Luca Ongaro
