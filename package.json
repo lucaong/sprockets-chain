@@ -1,7 +1,7 @@
 {
   "author": "Luca Ongaro <mail@lucaongaro.eu> (http://www.lucaongaro.eu)",
   "name": "sprockets-chain",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "repository": {
     "type": "git",
     "url": "https://github.com/lucaong/sprockets-chain.git"
