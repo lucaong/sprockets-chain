@@ -16,6 +16,7 @@ describe("SprocketsChain", function() {
     this.res2  = new SprocketsChain.Resource( "two/two.js", sc._trail );
     this.res3  = new SprocketsChain.Resource( "bad_eoln.js", sc._trail );
     this.res4  = new SprocketsChain.Resource( "multi.js", sc._trail );
+    this.res5  = new SprocketsChain.Resource( "eleven/one.js", sc._trail );
   });
 
   describe("SprocketsChain.Resource", function() {
@@ -170,6 +171,13 @@ describe("SprocketsChain", function() {
     });
 
     describe("depChain", function() {
+      function full_path(file_name, fixtures_dir) {
+        if (!fixtures_dir) {
+          fixtures_dir = "spec/fixtures"
+        }
+        return _path.join( _path.resolve(".", fixtures_dir), file_name );
+      }
+
       it("returns the dependency chain", function() {
         var chain    = this.res.depChain(),
             expected = [ "eight/eight.coffee", "four.js", "one.js", "two/three.coffee", "two/two.js", "five/six/seven.js.coffee", "five/six/seven.js.coffee", "five/six/six.js" ]
@@ -178,21 +186,26 @@ describe("SprocketsChain", function() {
               if ( p === "four.js" ) {
                 fixtures_dir = "spec/fixtures2";
               }
-              return _path.join( _path.resolve(".", fixtures_dir), p );
+              return full_path(p, fixtures_dir);
             });
         expect( chain ).toEqual( expected );
       });
 
       it("only includes dependencies required by siblings once", function() {
         var chain = this.res4.depChain();
-        function full_path(file_name) {
-          return _path.join( _path.resolve(".", "spec/fixtures"), file_name );
-        }
         expect( chain.length ).toEqual(4);
         expect( chain[0] ).toEqual(full_path("ten/one.js"));
         expect( chain[1] ).toEqual(full_path("ten/two.js"));
         expect( chain[2] ).toEqual(full_path("ten/three.js"));
         expect( chain[3] ).toEqual(full_path("multi.js"));
+      });
+
+      it("returns all dependencies for require_tree when the path is for the current directory (ie. 'require_tree ./') ", function() {
+        //Doing this has resulted in an infinite loop in the past.
+        var chain = this.res5.depChain();
+        expect( chain.length ).toEqual(2);
+        expect( chain[0] ).toEqual(full_path("eleven/one.js"));
+        expect( chain[1] ).toEqual(full_path("eleven/two.js"));
       });
     });
   });
