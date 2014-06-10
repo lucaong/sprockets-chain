@@ -15,6 +15,7 @@ describe("SprocketsChain", function() {
     this.res   = new SprocketsChain.Resource( "one.js", sc._trail );
     this.res2  = new SprocketsChain.Resource( "two/two.js", sc._trail );
     this.res3  = new SprocketsChain.Resource( "bad_eoln.js", sc._trail );
+    this.res4  = new SprocketsChain.Resource( "multi.js", sc._trail );
   });
 
   describe("SprocketsChain.Resource", function() {
@@ -180,6 +181,18 @@ describe("SprocketsChain", function() {
               return _path.join( _path.resolve(".", fixtures_dir), p );
             });
         expect( chain ).toEqual( expected );
+      });
+
+      it("only includes dependencies required by siblings once", function() {
+        var chain = this.res4.depChain();
+        function full_path(file_name) {
+          return _path.join( _path.resolve(".", "spec/fixtures"), file_name );
+        }
+        expect( chain.length ).toEqual(4);
+        expect( chain[0] ).toEqual(full_path("ten/one.js"));
+        expect( chain[1] ).toEqual(full_path("ten/two.js"));
+        expect( chain[2] ).toEqual(full_path("ten/three.js"));
+        expect( chain[3] ).toEqual(full_path("multi.js"));
       });
     });
   });
