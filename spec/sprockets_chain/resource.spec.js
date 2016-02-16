@@ -11,6 +11,7 @@ describe("SprocketsChain", function() {
     var sc     = new SprocketsChain("./spec");
     sc.appendPath("fixtures");
     sc.appendPath("fixtures2");
+    sc.appendPath("fixtures3");
     this.trail = sc._trail;
     this.res   = new SprocketsChain.Resource( "one.js", sc._trail );
     this.res2  = new SprocketsChain.Resource( "two/two.js", sc._trail );
@@ -40,6 +41,26 @@ describe("SprocketsChain", function() {
       it("sets the correct logical path with extension for index files", function() {
         var res = new SprocketsChain.Resource( "nine", this.trail );
         expect( res.logical_path ).toEqual( "nine/index.js" );
+      });
+
+      it("sets the correct full path from bower.json's main", function() {
+        var res = new SprocketsChain.Resource( "twelve", this.trail );
+        expect( res.full_path ).toEqual( _path.resolve(".", "spec/fixtures3/twelve/one.js") );
+      });
+
+      it("sets the correct logical path from bower.json's main", function() {
+        var res = new SprocketsChain.Resource( "twelve", this.trail );
+        expect( res.logical_path ).toEqual( "twelve/one.js" );
+      });
+
+      it("sets the correct full path from bower.json's main", function() {
+        var res = new SprocketsChain.Resource( "thirteen", this.trail );
+        expect( res.full_path ).toEqual( _path.resolve(".", "spec/fixtures3/thirteen/one.js") );
+      });
+
+      it("parses bower.json's main property when an array", function() {
+        var res = new SprocketsChain.Resource( "thirteen", this.trail );
+        expect( res.logical_path ).toEqual( "thirteen/one.js" );
       });
 
       describe("Windows paths", function() {
