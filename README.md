@@ -1,16 +1,19 @@
 # SprocketsChain
 
-`SprocketsChain` is a small node.js utility that parses Sprockets require directives and returns the dependency chain
-for a JavaScript bundle, which is a list of the file paths that make the bundle, ordered so that each file is preceded
-by all its dependencies.
+`SprocketsChain` is a small node.js utility that parses Sprockets require
+directives and returns the dependency chain for a JavaScript bundle, which is a
+list of the file paths that make the bundle, ordered so that each file is
+preceded by all its dependencies.
 
 ## Why
 
-Sprockets is very nice for managing assets and their dependencies in a Ruby project. When testing JavaScript though,
-precompiling and bundling assets is slow and not really needed. It is more efficient to just require the separate
-JavaScript/CoffeeScript source files in the correct order. `SprocketsChain` parses the require directives and provides
-you with the correct ordered list of absolute file paths. This helps setting up a JavaScript test suite that is fast and
-completely independent from the Ruby application environment.
+Sprockets is very nice for managing assets and their dependencies in a Ruby
+project. When testing JavaScript though, precompiling and bundling assets is
+slow and not really needed. It is more efficient to just require the separate
+JavaScript/CoffeeScript source files in the correct order. `SprocketsChain`
+parses the require directives and provides you with the correct ordered list of
+absolute file paths. This helps setting up a JavaScript test suite that is fast
+and completely independent from the Ruby application environment.
 
 ## Usage
 
@@ -34,15 +37,19 @@ var chain = sc.depChain("application.js");
 
 ## Supported Sprockets directives
 
-The following Sprockets directive are supported: `require`, `require_self`, `require_directory`, `require_tree`
-and `include`
+The following Sprockets directive are supported: `require`, `require_self`,
+`require_directory`, `require_tree`, `stub` and `include`
 
 
 ## Contributing
 
-Contributes are very welcome :) Just make sure you write proper tests for your feature and send a pull request. To run the test suite, which is based on `BusterJS`, make sure you install all development dependencies with `npm install` and then just run `npm test`.
+Contributes are very welcome :) Just make sure you write proper tests for your
+feature and send a pull request. To run the test suite, which is based on
+`BusterJS`, make sure you install all development dependencies with `npm
+install` and then just run `npm test`.
 
-Please do not bump the version number, I will do that when the change is accepted and merge.
+Please do not bump the version number, I will do that when the change is
+accepted and merge.
 
 
 ## MIT License
