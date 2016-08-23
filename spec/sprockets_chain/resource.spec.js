@@ -142,15 +142,17 @@ describe("SprocketsChain", function() {
     describe("parseDeps", function() {
       it("returns all dependencies, with logical path and directive", function() {
         this.stub( this.res, "parseRequires", function() {
-          return ["require four", "require_self", "require_directory ./two", "require_tree ./five"];
+          return ["require four", "require_self", "require_directory ./two", "require_tree ./five", "stub ./five/six/eight-stub"];
         });
         expect( this.res.parseDeps() ).toEqual([
           { path: "four",                     directive: "require" },
           { path: "one.js",                   directive: "require_self" },
           { path: "two/three.coffee",         directive: "require_directory" },
           { path: "two/two.js",               directive: "require_directory" },
+          { path: "five/six/eight-stub.js",   directive: "require_tree" },
           { path: "five/six/seven.js.coffee", directive: "require_tree" },
-          { path: "five/six/six.js",          directive: "require_tree" }
+          { path: "five/six/six.js",          directive: "require_tree" },
+          { path: "five/six/eight-stub",      directive: "stub" }
         ]);
       });
 

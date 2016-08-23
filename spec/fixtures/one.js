@@ -4,3 +4,4 @@
 *= require_directory ./two
 */
 //= require_tree ./five
+//= stub ./five/six/eight-stub
